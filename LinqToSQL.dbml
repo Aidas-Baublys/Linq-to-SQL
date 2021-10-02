@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EchoDB" Class="LinqToSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LTVP-N-18\SERVAKAS;Initial Catalog=EchoDB;Persist Security Info=True;User ID=sa" SettingsObjectName="Link_to_SQL.Properties.Settings" SettingsPropertyName="EchoDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.University" Member="Universities">
+    <Type Name="University">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

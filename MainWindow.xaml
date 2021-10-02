@@ -8,6 +8,6 @@
         Title="MainWindow" Height="450" Width="800"
         >
     <Grid>
-        <DataGrid x:Name="MainData" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid x:Name="MainData" Width="750" Height="350" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>
