@@ -31,7 +31,10 @@ namespace Link_to_SQL
             //InsertUni("MRU");
             //InsertUni("Yale");
 
-            InsertStudent();
+            //InsertStudent();
+            //InsertLectures();
+            //InsertStudentLecture();
+            GetUni("Virga");
         }
 
         public void InsertUni(string name)
@@ -60,6 +63,46 @@ namespace Link_to_SQL
             dataContext.SubmitChanges();
 
             MainData.ItemsSource = dataContext.Students;
+        }
+
+        public void InsertLectures()
+        {
+            dataContext.Lectures.InsertOnSubmit(new Lecture { Name = "Math" });
+            dataContext.Lectures.InsertOnSubmit(new Lecture { Name = "History" });
+            dataContext.SubmitChanges();
+
+            MainData.ItemsSource = dataContext.Lectures;
+        }
+
+        public void InsertStudentLecture()
+        {
+            Student tomas = dataContext.Students.First(s => s.Name.Equals("Tomas"));
+            Student virga = dataContext.Students.First(s => s.Name.Equals("Virga"));
+            Student jonas = dataContext.Students.First(s => s.Name.Equals("Jonas"));
+            Student use = dataContext.Students.First(s => s.Name.Equals("Use"));
+
+            Lecture math = dataContext.Lectures.First(l => l.Name.Equals("Math"));
+            Lecture history = dataContext.Lectures.First(l => l.Name.Equals("History"));
+
+            List<StudentLecture> studentLectures = new List<StudentLecture>();
+            studentLectures.Add(new StudentLecture { Student = tomas, Lecture = math });
+            studentLectures.Add(new StudentLecture { Student = tomas, Lecture = history });
+            studentLectures.Add(new StudentLecture { Student = virga, Lecture = math });
+            studentLectures.Add(new StudentLecture { Student = jonas, Lecture = math });
+            studentLectures.Add(new StudentLecture { Student = use, Lecture = history });
+
+            dataContext.StudentLectures.InsertAllOnSubmit(studentLectures);
+            dataContext.SubmitChanges();
+
+            MainData.ItemsSource = dataContext.StudentLectures;
+        }
+
+        public void GetUni(string studentName)
+        {
+            Student student = dataContext.Students.First(s => s.Name.Equals(studentName));
+            University uni = student.University;
+            List<University> u = new List<University>() { uni };
+            MainData.ItemsSource = u;
         }
     }
 }
