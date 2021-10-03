@@ -26,16 +26,19 @@ namespace Link_to_SQL
 
             string cs = ConfigurationManager.ConnectionStrings["Link_to_SQL.Properties.Settings.EchoDBConnectionString"].ConnectionString;
             dataContext = new LinqToSQLDataContext(cs);
+            //dataContext.ExecuteCommand("delete from University");
 
-            InsertUni("MRU");
+            //InsertUni("MRU");
+            //InsertUni("Yale");
+
+            InsertStudent();
         }
 
         public void InsertUni(string name)
         {
-            dataContext.ExecuteCommand("delete from University");
-
             University uni = new University();
             uni.Name = name;
+
             dataContext.Universities.InsertOnSubmit(uni);
             dataContext.SubmitChanges();
 
@@ -44,7 +47,19 @@ namespace Link_to_SQL
 
         public void InsertStudent()
         {
-            University uni = dataContext.Universities.First(u => u.Name.Equals("MRU"));
+            University mru = dataContext.Universities.First(u => u.Name.Equals("MRU"));
+            University yale = dataContext.Universities.First(u => u.Name.Equals("Yale"));
+
+            List<Student> students = new List<Student>();
+            students.Add(new Student { Name = "Tomas", Gender = "male", Id = 1, UniID = yale.Id });
+            students.Add(new Student { Name = "Virga", Gender = "female", Id = 2, University = mru });
+            students.Add(new Student { Name = "Jonas", Gender = "fury", Id = 3, University = mru });
+            students.Add(new Student { Name = "Use", Gender = "female", Id = 4, University = yale });
+
+            dataContext.Students.InsertAllOnSubmit(students);
+            dataContext.SubmitChanges();
+
+            MainData.ItemsSource = dataContext.Students;
         }
     }
 }
