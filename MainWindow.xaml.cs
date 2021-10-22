@@ -37,7 +37,8 @@ namespace Link_to_SQL
             //GetUni("Use");
             //GetLectures("Tomas");
             //GetAllStudentsFromUni("Yale");
-            GetUniByGenderPref("female");
+            //GetUniByGenderPref("female");
+            GetUniLectures("Yale");
         }
 
         public void InsertUni(string name)
@@ -119,8 +120,8 @@ namespace Link_to_SQL
 
         public void GetAllStudentsFromUni(string university)
         {
-            var students = from uniStud in dataContext.Students 
-                           where uniStud.University.Name == university 
+            var students = from uniStud in dataContext.Students
+                           where uniStud.University.Name == university
                            select uniStud;
 
             MainData.ItemsSource = students;
@@ -135,6 +136,16 @@ namespace Link_to_SQL
                            select university;
 
             MainData.ItemsSource = transUni;
+        }
+
+        public void GetUniLectures(string university)
+        {
+            var uniLec = from sl in dataContext.StudentLectures
+                         join student in dataContext.Students on sl.StudentID equals student.Id
+                         where student.University.Name == university
+                         select sl.Lecture;
+
+            MainData.ItemsSource = uniLec;
         }
     }
 }
