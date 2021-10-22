@@ -38,7 +38,8 @@ namespace Link_to_SQL
             //GetLectures("Tomas");
             //GetAllStudentsFromUni("Yale");
             //GetUniByGenderPref("female");
-            GetUniLectures("Yale");
+            //GetUniLectures("Yale");
+            //UpdateStudName("Use", "Puse");
         }
 
         public void InsertUni(string name)
@@ -146,6 +147,17 @@ namespace Link_to_SQL
                          select sl.Lecture;
 
             MainData.ItemsSource = uniLec;
+        }
+
+        public void UpdateStudName(string currentName, string newName)
+        {
+            Student stud = dataContext.Students.First(s => s.Name.Equals(currentName));
+
+            stud.Name = newName;
+
+            dataContext.SubmitChanges();
+
+            MainData.ItemsSource = dataContext.Students;
         }
     }
 }
