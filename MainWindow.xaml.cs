@@ -164,7 +164,7 @@ namespace Link_to_SQL
         public void DeleteStud(string name)
         {
             Student stud = dataContext.Students.First(s => s.Name.Equals(name));
-            
+
             dataContext.Students.DeleteOnSubmit(stud);
             dataContext.SubmitChanges();
 
