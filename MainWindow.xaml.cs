@@ -36,7 +36,7 @@ namespace Link_to_SQL
             //InsertStudentLecture();
             //GetUni("Use");
             //GetLectures("Tomas");
-            GetAllStudentsFromUni("Yale");
+            //GetAllStudentsFromUni("Yale");
             //GetUniByGenderPref("female");
             //GetUniLectures("Yale");
             //UpdateStudName("Use", "Puse");
