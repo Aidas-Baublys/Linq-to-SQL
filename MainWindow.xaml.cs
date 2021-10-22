@@ -36,10 +36,11 @@ namespace Link_to_SQL
             //InsertStudentLecture();
             //GetUni("Use");
             //GetLectures("Tomas");
-            //GetAllStudentsFromUni("Yale");
+            GetAllStudentsFromUni("Yale");
             //GetUniByGenderPref("female");
             //GetUniLectures("Yale");
             //UpdateStudName("Use", "Puse");
+            //DeleteStud("Puse");
         }
 
         public void InsertUni(string name)
@@ -155,6 +156,16 @@ namespace Link_to_SQL
 
             stud.Name = newName;
 
+            dataContext.SubmitChanges();
+
+            MainData.ItemsSource = dataContext.Students;
+        }
+
+        public void DeleteStud(string name)
+        {
+            Student stud = dataContext.Students.First(s => s.Name.Equals(name));
+            
+            dataContext.Students.DeleteOnSubmit(stud);
             dataContext.SubmitChanges();
 
             MainData.ItemsSource = dataContext.Students;
