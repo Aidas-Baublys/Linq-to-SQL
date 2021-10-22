@@ -34,8 +34,9 @@ namespace Link_to_SQL
             //InsertStudent();
             //InsertLectures();
             //InsertStudentLecture();
-            //GetUni("Virga");
-            GetLectures("Tomas");
+            //GetUni("Use");
+            //GetLectures("Tomas");
+            GetAllStudentsFromUni("Yale");
         }
 
         public void InsertUni(string name)
@@ -113,6 +114,15 @@ namespace Link_to_SQL
             var lectures = from sl in student.StudentLectures select sl.Lecture;
 
             MainData.ItemsSource = lectures;
+        }
+
+        public void GetAllStudentsFromUni(string university)
+        {
+            University uni = dataContext.Universities.First(u => u.Name.Equals(university));
+
+            var students = from uniStud in uni.Students select uniStud;
+
+            MainData.ItemsSource = students;
         }
     }
 }
