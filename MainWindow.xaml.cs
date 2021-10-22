@@ -118,9 +118,9 @@ namespace Link_to_SQL
 
         public void GetAllStudentsFromUni(string university)
         {
-            University uni = dataContext.Universities.First(u => u.Name.Equals(university));
-
-            var students = from uniStud in uni.Students select uniStud;
+            var students = from uniStud in dataContext.Students 
+                           where uniStud.University.Name == university 
+                           select uniStud;
 
             MainData.ItemsSource = students;
         }
